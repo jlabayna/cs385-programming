@@ -1,0 +1,15 @@
+17:27:35 **** Incremental Build of configuration Debug for project Stairclimber ****
+make all 
+Building file: ../stairclimber.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"stairclimber.d" -MT"stairclimber.o" -o "stairclimber.o" "../stairclimber.cpp"
+Finished building: ../stairclimber.cpp
+ 
+Building target: Stairclimber
+Invoking: GCC C++ Linker
+g++  -o "Stairclimber"  ./stairclimber.o   
+Finished building target: Stairclimber
+ 
+
+17:27:36 Build Finished. 0 errors, 0 warnings. (took 1s.80ms)
+

@@ -1,0 +1,15 @@
+13:32:37 **** Incremental Build of configuration Debug for project Student ****
+make all 
+Building file: ../student.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"student.d" -MT"student.o" -o "student.o" "../student.cpp"
+Finished building: ../student.cpp
+ 
+Building target: Student
+Invoking: GCC C++ Linker
+g++  -o "Student"  ./student.o   
+Finished building target: Student
+ 
+
+13:32:38 Build Finished. 0 errors, 0 warnings. (took 1s.2ms)
+

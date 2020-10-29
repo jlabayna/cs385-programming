@@ -1,0 +1,6 @@
+00:33:14 **** Incremental Build of configuration Default for project HelloWorld ****
+make all 
+g++ -g -Wall -Werror -pedantic-errors -fmessage-length=0 helloworld.cpp -o helloworld
+
+00:33:14 Build Finished. 0 errors, 0 warnings. (took 791ms)
+

@@ -1,0 +1,259 @@
+
+/*
+ * waterjugpuzzle.cpp
+ *
+ *  Created on: Oct 14, 2020
+ *      Author: user
+ */
+
+#include <iostream>
+#include <sstream>
+#include <queue>
+#include <unistd.h>
+
+using namespace std;
+
+// Struct to represent state of water in the jugs.
+struct State {
+    int a, b, c;
+    string directions;
+    State *parent;
+
+    State(int _a, int _b, int _c, string _directions) :
+        a{_a}, b{_b}, c{_c}, directions(_directions), parent{nullptr} { }
+
+    // String representation of state in tuple form.
+    string to_string() {
+        ostringstream oss;
+        oss << "(" << a << ", " << b << ", " << c << ")";
+        return oss.str();
+    }
+
+    bool equals(State *s) {
+    	return a == s->a && b == s->b && c == s->c;
+    }
+};
+
+/**
+ * Simple pour simulation
+ * Pass in copy of parent.
+ * Modify copy to get child.
+ * @param s Input state
+ * @param source Source jug
+ * @param dest Destination jug
+ * @param source_cap Source jug capacity
+ * @param dest_cap Destination jug capacity
+ */
+void pour(State *s, State *parent, string jug1, string jug2, int &source, int &dest, const int dest_cap) {
+	int poured = dest_cap-dest;
+	int max_pour = dest_cap-dest;
+	if(source > max_pour) {
+		poured = max_pour;
+		dest = dest_cap;
+		source -= poured;
+	} else {
+		poured = source;
+		dest += poured;
+		source = 0;
+	}
+	s->directions = "Pour " + to_string(poured) + " gallon" + (poured==1?"":"s")
+			+ " from " + jug1 + " to " + jug2;
+	s->parent = parent;
+	//cout << s->to_string() << ":" << s->directions << ":" << s->parent->to_string() << endl;
+}
+
+/**
+ * Returns whether or not a state was visited
+ * @param s State to check if visited or not
+ * @param visited List of visited states
+ * @return Whether or not state s was visited
+ */
+bool isVisited(State *s, State ***visited,int a_cap, int b_cap) {
+	for (int i = 0; i < a_cap + 1; i++) {
+		for (int j = 0; j < b_cap + 1; j++) {
+			if (visited[i][j] != nullptr) {
+				if (visited[i][j]->equals(s)) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+/**
+ * @param s Initial state
+ */
+void solve(State *s, State *target, const int a_cap, const int b_cap, const int c_cap) {
+	// Initialize to negative value jugs.
+	State ***visited = new State**[a_cap+1];
+	for (int i = 0; i < a_cap+1; ++i) {
+		visited[i] = new State*[b_cap+1];
+	}
+
+	for (int i = 0; i < a_cap + 1; ++i) {
+		for (int j = 0; j < b_cap + 1; ++j) {
+			visited[i][j] = new State(-1,-1,-1,"");
+		}
+	}
+
+	queue<State*> *q = new queue<State*>();
+	q->push(s);
+	State *current = s;
+	State *next = nullptr;
+
+	while (!q->empty()) {
+		if (current->equals(target)) {
+			delete visited[current->a][current->b];
+			visited[current->a][current->b] = current;
+			cout << q->size();
+			current = q->front();
+			break;
+		}
+		if (current->c != 0 && current->a != a_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "C", "A", next->c, next->a, a_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		if (current->b != 0 && current->a != a_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "B", "A", next->b, next->a, a_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		if (current->c != 0 && current->b != b_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "C", "B", next->c, next->b, b_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		if (current->a != 0 && current->b != b_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "A", "B", next->a, next->b, b_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		if (current->b != 0 && current->c != c_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "B", "C", next->b, next->c, c_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		if (current->a != 0 && current->c != c_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "A", "C", next->a, next->c, c_cap);
+			if (!isVisited(next, visited, a_cap, b_cap)) {
+				q->push(next);
+			} else {
+				delete next;
+			}
+		}
+
+		q->pop();
+		delete visited[current->a][current->b];
+		visited[current->a][current->b] = current;
+		current = q->front();
+	}
+
+	cout << q->size();
+
+	if (q->empty()) {
+		cout << "No solution." << endl;
+	} else {
+		delete visited[current->a][current->b];
+		visited[current->a][current->b] = next;
+		string final = "";
+		while (current->parent != nullptr) {
+			final = current->directions + ". " + current->to_string() + "\n" + final;
+			current = current->parent;
+		}
+		cout << current->directions << " " << current->to_string() << "\n" << final;
+	}
+
+	while (!q->empty()) {
+		delete q->front();
+		q->pop();
+	}
+
+	for (int i = 0; i < a_cap + 1; i++) {
+		for (int j = 0; j < b_cap + 1; j++) {
+			delete visited[i][j];
+		}
+		delete[] visited[i];
+	}
+
+	delete[] visited;
+
+	delete q;
+
+}
+
+int main(int argc, char * const argv[]) {
+
+	int inputNums[6] = {0};
+	istringstream iss;
+
+	if (argc != 7) {
+		cerr << "Usage: " << argv[0]
+				<< " <cap A> <cap B> <cap C> <goal A> <goal B> <goal C>"
+				<< endl;
+		return 1;
+	}
+
+	for(int i = 1; i < 7; i++) {
+		iss.str(argv[i]);
+		if( !(iss >> inputNums[i-1]) || inputNums[i-1] < 0 || (i == 3 && inputNums[i-1] <= 0)) {
+			cerr << "Error: Invalid " << (i <= 3 ? "capacity " : "goal ")
+					<< "\'" << argv[i] << "\'" << " for jug " << char(((i-1) % 3) + 65) << "." << endl;
+			return 1;
+		}
+		iss.clear();
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (inputNums[i] < inputNums[i+3]) {
+			cerr << "Error: Goal cannot exceed capacity of jug " << char((i % 3) + 65) << "." << endl;
+			return 1;
+		}
+	}
+
+	if(inputNums[3] + inputNums[4] + inputNums[5] != inputNums[2]) {
+		cerr << "Error: Total gallons in goal state must be equal to the capacity of jug C." << endl;
+		return 1;
+	}
+
+	State *s = new State(0,0,inputNums[2], "Initial state.");
+	State *target = new State(inputNums[3],inputNums[4],inputNums[5],"");
+	solve(s, target, inputNums[0],inputNums[1],inputNums[2]);
+
+	delete target;
+
+    return 0;
+}

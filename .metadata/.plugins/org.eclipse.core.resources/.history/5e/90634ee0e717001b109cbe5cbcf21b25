@@ -1,0 +1,15 @@
+/*
+ * inversioncounter.cpp
+ *
+ *  Created on: Oct 26, 2020
+ *      Author: user
+ */
+
+#include <iostream>
+#include <sstream>
+#include <queue>
+#include <unistd.h>
+
+int main
+
+

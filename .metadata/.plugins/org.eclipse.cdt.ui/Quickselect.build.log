@@ -1,0 +1,6 @@
+18:29:28 **** Incremental Build of configuration Debug for project Quickselect ****
+make all 
+make: Nothing to be done for 'all'.
+
+18:29:28 Build Finished. 0 errors, 0 warnings. (took 442ms)
+

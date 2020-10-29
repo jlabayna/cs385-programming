@@ -1,0 +1,2 @@
+cs385-waterjugpuzzle/waterjugpuzzle.o: \
+ ../cs385-waterjugpuzzle/waterjugpuzzle.cpp

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;tester/makefile&apos; to &apos;makefileCommented&apos;" description="Rename resource &apos;makefile&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="makefile" name="makefileCommented" stamp="1599664892515" updateReferences="false"/>&#x0A;<refactoring comment="Rename resource &apos;tester/makefileCommented&apos; to &apos;makefile&apos;" description="Rename resource &apos;makefileCommented&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="makefileCommented" name="makefile" stamp="1599664909565" updateReferences="true"/>
+</session>

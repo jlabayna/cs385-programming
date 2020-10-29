@@ -1,0 +1,209 @@
+
+/*
+ * waterjugpuzzle.cpp
+ *
+ *  Created on: Oct 14, 2020
+ *      Author: user
+ */
+
+#include <iostream>
+#include <sstream>
+#include <queue>
+#include <unistd.h>
+
+using namespace std;
+
+// Struct to represent state of water in the jugs.
+struct State {
+    int a, b, c;
+    string directions;
+    State *parent;
+
+    State(int _a, int _b, int _c, string _directions) :
+        a{_a}, b{_b}, c{_c}, directions(_directions), parent{nullptr} { }
+
+    // String representation of state in tuple form.
+    string to_string() {
+        ostringstream oss;
+        oss << "(" << a << ", " << b << ", " << c << ")";
+        return oss.str();
+    }
+
+    bool equals(State *s) {
+    	return a == s->a && b == s->b && c == s->c;
+    }
+};
+
+/**
+ * Simple pour simulation
+ * Pass in copy of parent.
+ * Modify copy to get child.
+ * @param s Input state
+ * @param source Source jug
+ * @param dest Destination jug
+ * @param source_cap Source jug capacity
+ * @param dest_cap Destination jug capacity
+ */
+void pour(State *s, State *parent, string jug1, string jug2, int &source, int &dest, const int dest_cap) {
+	int poured = dest_cap-dest;
+	int max_pour = dest_cap-dest;
+	if(source > max_pour) {
+		poured = max_pour;
+		dest = dest_cap;
+		source -= poured;
+	} else {
+		poured = source;
+		dest += poured;
+		source = 0;
+	}
+	s->directions = "Pour " + to_string(poured) + " gallon" + (poured==1?"":"s")
+			+ " from " + jug1 + " to " + jug2;
+	s->parent = parent;
+	//cout << s->to_string() << ":" << s->directions << ":" << s->parent->to_string() << endl;
+}
+
+/**
+ * Returns whether or not a state was visited
+ * @param s State to check if visited or not
+ * @param visited List of visited states
+ * @return Whether or not state s was visited
+ */
+bool isVisited(State *s, State ***visited) {
+	for (int i = 0; i < 3 + 1; i++) {
+		for (int j = 0; j < 5 + 1; j++) {
+			if (visited[i][j] != nullptr) {
+				if (visited[i][j]->equals(s)) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+/**
+ * @param s Initial state
+ */
+void solve(State *s, State *target, const int a_cap, const int b_cap, const int c_cap) {
+	State ***visited = new State**[a_cap+1];
+	for (int i = 0; i < a_cap+1; ++i) {
+		visited[i] = new State*[b_cap+1];
+	}
+	queue<State*> *q = new queue<State*>();
+	q->push(s);
+	State *current = s;
+	State *next = NULL;
+
+
+	while (!q->empty()) {
+		if (current->c != 0 && current->a != a_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "C", "A", next->c, next->a, a_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		if (current->b != 0 && current->a != a_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "B", "A", next->b, next->a, a_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		if (current->c != 0 && current->b != b_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "C", "B", next->c, next->b, b_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		if (current->a != 0 && current->b != b_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "A", "B", next->a, next->b, b_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		if (current->b != 0 && current->c != c_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "B", "C", next->b, next->c, c_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		if (current->a != 0 && current->c != c_cap) {
+			next = new State(current->a, current->b, current->c,
+					current->directions);
+			pour(next, current, "A", "C", next->a, next->c, c_cap);
+			if (next->equals(target)) {
+				break;
+			}
+			if (!isVisited(next, visited)) {
+				q->push(next);
+			}
+		}
+
+		q->pop();
+		visited[current->a][current->b] = current;
+		current = q->front();
+	}
+
+	if (!next->equals(target)) {
+		cout << "FAIL :(" << endl;
+	} else {
+		string final = "";
+		while (next->parent != nullptr) {
+			final = next->directions + next->to_string() + "\n" + final;
+			next = next->parent;
+		}
+		cout << next->directions << " " << next->to_string() << "\n" << final;
+	}
+
+	while (!q->empty()) {
+		delete q->front();
+		q->pop();
+	}
+
+	for (int i = 0; i < 3 + 1; i++) {
+		for (int j = 0; j < 5 + 1; j++) {
+			if (visited[i][j] != nullptr) {
+				delete visited[i][j];
+			}
+		}
+	}
+	delete visited;
+
+}
+
+int main() {
+	State *s = new State(0, 0, 8, "Initial state.");
+	State *target = new State(0,2,6,"end.");
+	solve(s, target, 3,5,8);
+
+    return 0;
+}

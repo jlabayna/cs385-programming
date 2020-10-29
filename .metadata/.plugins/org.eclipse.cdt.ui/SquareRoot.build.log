@@ -1,0 +1,17 @@
+23:37:05 **** Incremental Build of configuration Debug for project SquareRoot ****
+make all 
+make: Warning: File 'subdir.mk' has modification time 0.94 s in the future
+Building file: ../sqrt.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"sqrt.d" -MT"sqrt.o" -o "sqrt.o" "../sqrt.cpp"
+Finished building: ../sqrt.cpp
+ 
+Building target: SquareRoot
+Invoking: GCC C++ Linker
+g++  -o "SquareRoot"  ./sqrt.o   
+Finished building target: SquareRoot
+ 
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+23:37:06 Build Finished. 0 errors, 0 warnings. (took 860ms)
+

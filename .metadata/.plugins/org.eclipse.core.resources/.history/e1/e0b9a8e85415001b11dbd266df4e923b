@@ -1,0 +1,288 @@
+/*******************************************************************************
+ * Name        : waterjugpuzzle.cpp
+ * Author      : James Albert P. Labayna
+ * Date        : 2020-10-20
+ * Description : Solve the water jug puzzle using breadth-first search
+ * Pledge      : I pledge my honor that I have abided by the Stevens Honor System.
+ ******************************************************************************/
+
+#include <iostream>
+#include <sstream>
+#include <queue>
+#include <unistd.h>
+
+using namespace std;
+
+// Struct to represent state of water in the jugs.
+struct State {
+	int a, b, c;
+	string directions;
+	State *parent;
+
+	State(int _a, int _b, int _c, string _directions) :
+			a { _a }, b { _b }, c { _c }, directions(_directions), parent {
+					nullptr } {
+	}
+
+	// String representation of state in tuple form.
+	string to_string() {
+		ostringstream oss;
+		oss << "(" << a << ", " << b << ", " << c << ")";
+		return oss.str();
+	}
+};
+
+/**
+ * Lighter pour simulation (doesn't need state inputs)
+ * Pass in integers representing the State to transition from (via pouring).
+ * The use of integers has a dual purpose:
+ * 1. Check if a new State should be created.
+ * 2. Calculate the proper values for the new State
+ * @param source Source jug variable
+ * @param dest Destination jug variable
+ * @param poured Variable for storing poured amount
+ * @param dest_cap Destination jug capacity
+ */
+inline void pourLite(int &source, int &dest, int &poured, const int dest_cap) {
+	poured = dest_cap - dest;
+	int max_pour = dest_cap - dest;
+	dest += source;
+	if (source > max_pour) {
+		dest = dest_cap;
+		source -= max_pour;
+	} else {
+		poured = source;
+		source = 0;
+	}
+}
+
+/**
+ * Solves and prints the solution to a water jug puzzle.
+ * Assumes input is valid (non-negative amounts, valid target, valid capacities)
+ * @param s Initial state
+ * @param aTarget Jug a target value
+ * @param bTarget Jug b target value
+ * @param cTarget Jug c target value
+ * @param a_cap Jug a capacity
+ * @param b_cap Jug b capacity
+ * @param c_cap Jug c capacity
+ */
+void solve(State *s, const int aTarget, const int bTarget, const int cTarget, const int a_cap, const int b_cap,
+		const int c_cap) {
+	// Initialize to negative value jugs.
+	const int rows = a_cap + 1;
+	const int cols = b_cap + 1
+
+	State ***visited = new State**[rows];
+	for (int i = 0; i < rows; ++i) {
+		visited[i] = new State*[cols];
+		for (int j = 0; j < cols; ++j) {
+			visited[i][j] = nullptr;
+		}
+	}
+
+	queue<State*> *q = new queue<State*>();
+	q->push(s);
+	State *current = s;
+	State *next = nullptr;
+
+	/*
+	 * Note:
+	 * Another test reveals roughly 30% improvement of speed when replacing calls to heap
+	 * with calls to stack.
+	 * Not sure how that translates here.
+	 * EDIT EDIT:
+	 * Changing calls didn't do much. Main improvement was removing redundant state creation
+	 * All in all, I think the if-statement blocks got less readable overall.
+	 * However, the efficiency gain is massive.
+	 */
+
+	int aCurr;
+	int bCurr;
+	int cCurr;
+	int aTemp;
+	int bTemp;
+	int cTemp;
+	int poured;
+
+	while (!q->empty()) {
+		aCurr = current->a;
+		bCurr = current->b;
+		cCurr = current->c;
+		if (aCurr == aTarget && bCurr == bTarget && cCurr == cTarget) {
+			current = q->front();
+			break;
+		}
+		//TODO Make more efficient.
+		//     Maybe only make the state if it's possible.
+		aTemp = aCurr;
+		bTemp = bCurr;
+		cTemp = cCurr;
+
+		// Very ugly block up ahead. Could probably stuff this in a function, but I'm lazy.
+		if (cCurr != 0 && aCurr != a_cap) {
+			pourLite(cTemp, aTemp, poured, a_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from C to A.");
+				next->parent = current;
+				q->push(next);
+			}
+			aTemp = aCurr;
+			cTemp = cCurr;
+		}
+
+		if (bCurr != 0 && aCurr != a_cap) {
+			pourLite(bTemp, aTemp, poured, a_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from B to A.");
+				next->parent = current;
+				q->push(next);
+			}
+			aTemp = aCurr;
+			bTemp = bCurr;
+		}
+
+		if (cCurr != 0 && bCurr != b_cap) {
+			pourLite(cTemp, bTemp, poured, b_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from C to B.");
+				next->parent = current;
+				q->push(next);
+			}
+			bTemp = bCurr;
+			cTemp = cCurr;
+		}
+
+		if (aCurr != 0 && bCurr != b_cap) {
+			pourLite(aTemp, bTemp, poured, b_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from A to B.");
+				next->parent = current;
+				q->push(next);
+			}
+			aTemp = aCurr;
+			bTemp = bCurr;
+		}
+
+		if (bCurr != 0 && cCurr != c_cap) {
+			pourLite(bTemp, cTemp, poured, c_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from B to C.");
+				next->parent = current;
+				q->push(next);
+			}
+			bTemp = bCurr;
+			cTemp = cCurr;
+		}
+
+		if (aCurr != 0 && cCurr != c_cap) {
+			pourLite(aTemp, cTemp, poured, c_cap);
+			if (visited[aTemp][bTemp] == nullptr) {
+				next = new State(aTemp, bTemp, cTemp,
+						"Pour " + to_string(poured) + " gallon"
+								+ (poured == 1 ? "" : "s") + " from A to C.");
+				next->parent = current;
+				q->push(next);
+			}
+			aTemp = aCurr;
+			cTemp = cCurr;
+		}
+
+		// I forgot what this delete does...
+		// OH! There are possibly duplicate states still created.
+		// If somehow, you can get to a state from 2+ others.
+		// Still tho. fixing this is marginal perf gain....
+		delete visited[aCurr][bCurr];
+		visited[aCurr][bCurr] = current;
+		q->pop();
+		current = q->front();
+	}
+
+	if (q->empty()) {
+		cout << "No solution." << endl;
+	} else {
+		string final = "";
+		while (current->parent != nullptr) {
+			final = current->directions + " " + current->to_string() + "\n"
+					+ final;
+			current = current->parent;
+		}
+		cout << current->directions << " " << current->to_string() << "\n"
+				<< final;
+		while (!q->empty()) {
+			delete q->front();
+			q->pop();
+		}
+	}
+
+	delete q;
+
+	for (int i = 0; i < a_cap + 1; i++) {
+		for (int j = 0; j < b_cap + 1; j++) {
+			delete visited[i][j];
+		}
+		delete[] visited[i];
+	}
+
+	delete[] visited;
+}
+
+int main(int argc, char *const argv[]) {
+	int input[6] = { 0 };
+	istringstream iss;
+
+	if (argc != 7) {
+		cerr << "Usage: " << argv[0]
+				<< " <cap A> <cap B> <cap C> <goal A> <goal B> <goal C>"
+				<< endl;
+		return 1;
+	}
+
+	// Note to self:
+	// Is it better to do the char thing here or to have separate statements or an array?
+	// i - 1 ugly.
+	for (int i = 1; i < 7; i++) {
+		iss.str(argv[i]);
+		// Check if input is valid conversion from string to int.
+		// Also check if input
+		if (!(iss >> input[i - 1]) || input[i - 1] < 0
+				|| (i == 3 && input[i - 1] <= 0)) {
+			cerr << "Error: Invalid " << (i <= 3 ? "capacity " : "goal ")
+					<< "\'" << argv[i] << "\'" << " for jug "
+					<< char(((i - 1) % 3) + 65) << "." << endl;
+			return 1;
+		}
+		iss.clear();
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (input[i] < input[i + 3]) {
+			cerr << "Error: Goal cannot exceed capacity of jug "
+					<< char((i % 3) + 65) << "." << endl;
+			return 1;
+		}
+	}
+
+	if (input[3] + input[4] + input[5] != input[2]) {
+		cerr
+				<< "Error: Total gallons in goal state must be equal to the capacity of jug C."
+				<< endl;
+		return 1;
+	}
+
+	State *s = new State(0, 0, input[2], "Initial state.");
+	// This 3,4,5,0,1,2 looks so ugly, but it used to be "s, target," where target was a State
+	solve(s, input[3], input[4], input[5], input[0], input[1], input[2]);
+
+	return 0;
+}

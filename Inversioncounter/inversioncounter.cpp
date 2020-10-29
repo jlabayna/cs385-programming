@@ -1,0 +1,53 @@
+/*
+ * inversioncounter.cpp
+ *
+ *  Created on: Oct 26, 2020
+ *      Author: user
+ */
+
+#include <iostream>
+#include <sstream>
+#include <queue>
+#include <unistd.h>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+	istringstream iss;
+
+	std::cout << "Enter sequence of integers, each followed by a space: " << std::flush;
+	int value, index = 0;
+	    vector<int> values;
+	    string str;
+	    str.reserve(11);
+	    char c;
+	    iss.clear();
+	    while (true) {
+	        c = getchar();
+	        const bool eoln = c == '\r' || c == '\n';
+	        if (isspace(c) || eoln) {
+	            if (str.length() > 0) {
+	                iss.str(str);
+	                if (iss >> value) {
+	                    values.push_back(value);
+	                } else {
+	                    cerr << "Error: Non-integer value '" << str
+	                         << "' received at index " << index << "." << endl;
+	                    return 1;
+	                }
+	                iss.clear();
+	                ++index;
+	            }
+	            if (eoln) {
+	                break;
+	            }
+	            str.clear();
+	        } else {
+	            str += c;
+	        }
+		}
+	    cout << "Number of inversions: 1" << endl;
+	return 0;
+}
+
+
