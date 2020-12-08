@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:helloworld,org.eclipse.launchbar.core.descriptorType.default\:MaxOfTwo,org.eclipse.launchbar.core.descriptorType.default\:SquareRoot,org.eclipse.launchbar.core.descriptorType.default\:Sieve,org.eclipse.launchbar.core.descriptorType.default\:Student,org.eclipse.launchbar.core.descriptorType.default\:Unique,org.eclipse.launchbar.core.descriptorType.default\:Stairclimber,org.eclipse.launchbar.core.descriptorType.default\:Pointers,org.eclipse.launchbar.core.descriptorType.default\:Waterjugpuzzle,org.eclipse.launchbar.core.descriptorType.default\:tester,org.eclipse.launchbar.core.descriptorType.default\:Quickselect
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:helloworld,org.eclipse.launchbar.core.descriptorType.default\:MaxOfTwo,org.eclipse.launchbar.core.descriptorType.default\:SquareRoot,org.eclipse.launchbar.core.descriptorType.default\:Sieve,org.eclipse.launchbar.core.descriptorType.default\:Student,org.eclipse.launchbar.core.descriptorType.default\:Unique,org.eclipse.launchbar.core.descriptorType.default\:Stairclimber,org.eclipse.launchbar.core.descriptorType.default\:Pointers,org.eclipse.launchbar.core.descriptorType.default\:Waterjugpuzzle,org.eclipse.launchbar.core.descriptorType.default\:tester,org.eclipse.launchbar.core.descriptorType.default\:Quickselect,org.eclipse.launchbar.core.descriptorType.default\:Testrbt
 eclipse.preferences.version=1
 org.eclipse.launchbar.core.descriptorType.default\:Quickselect/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:Quickselect/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
@@ -10,6 +10,7 @@ org.eclipse.launchbar.core.descriptorType.default\:Sieve/activeLaunchTarget=org.
 org.eclipse.launchbar.core.descriptorType.default\:SquareRoot/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:SquareRoot/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Stairclimber/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:Testrbt/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:Waterjugpuzzle/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:helloworld/activeLaunchMode=run
 org.eclipse.launchbar.core.descriptorType.default\:helloworld/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

@@ -1,14 +1,12 @@
-20:41:45 **** Incremental Build of configuration Debug for project Inversioncounter ****
+02:14:44 **** Incremental Build of configuration Debug for project Shortestpaths ****
 make all 
-make: Warning: File 'subdir.mk' has modification time 0.053 s in the future
-Building file: ../inversioncounter.cpp
+Building file: ../shortestpaths.cpp
 Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"inversioncounter.d" -MT"inversioncounter.o" -o "inversioncounter.o" "../inversioncounter.cpp"
-Finished building: ../inversioncounter.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"shortestpaths.d" -MT"shortestpaths.o" -o "shortestpaths.o" "../shortestpaths.cpp"
+Finished building: ../shortestpaths.cpp
  
-Building target: Inversioncounter
+Building target: Shortestpaths
 Invoking: GCC C++ Linker
-g++  -o "Inversioncounter"  ./inversioncounter.o   
-Finished building target: Inversioncounter
+g++  -o "Shortestpaths"  ./shortestpaths.o   
+Finished building target: Shortestpaths
  
-make: warning:  Clock skew detected.  Your build may be incomplete.

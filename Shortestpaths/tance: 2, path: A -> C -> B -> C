@@ -1,0 +1,958 @@
+Compiling shortestpaths.cpp...done
+
+Running test 1...success [0.004 seconds]
+Running test 2...success [0.004 seconds]
+Running test 3...success [0.004 seconds]
+Running test 4...success [0.004 seconds]
+Running test 5...success [0.003 seconds]
+Running test 6...success [0.004 seconds]
+Running test 7...success [0.004 seconds]
+Running test 8...success [0.004 seconds]
+Running test 9...success [0.005 seconds]
+Running test 10...success [0.003 seconds]
+Running test 11...success [0.004 seconds]
+Running test 12...success [0.004 seconds]
+Running test 13...success [0.004 seconds]
+Running test 14...success [0.003 seconds]
+Running test 15...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+   A  B  C  D
+A  0  -  2 10
+B  7  0  5  1
+C  -  3  0  -
+D  2  6  6  0
+
+Path lengths:
+  A B C D
+A 0 5 2 6
+B 3 0 5 1
+C 6 3 0 4
+D 2 6 4 0
+
+Intermediate vertices:
+  A B C D
+A - C - C
+B D - - -
+C D - - B
+D - - A -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C
+A -> D, distance: 6, path: A -> C -> B -> D
+B -> A, distance: 3, path: B -> D -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 1, path: B -> D
+C -> A, distance: 6, path: C -> B -> D -> A
+C -> B, distance: 3, path: C -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 4, path: C -> B -> D
+D -> A, distance: 2, path: D -> A
+D -> B, distance: 6, path: D -> B
+D -> C, distance: 4, path: D -> A -> C
+D -> D, distance: 0, path: D
+
+Received________________________________________________________________________
+Distance matrix:
+   A  B  C  D
+A  0  -  2 10
+B  7  0  5  1
+C  -  3  0  -
+D  2  6  6  0
+
+Path lengths:
+  A B C D
+A 0 5 2 6
+B 3 0 5 1
+C 6 3 0 4
+D 2 6 4 0
+
+Intermediate vertices:
+  A B C D
+A - C - C
+B D - - -
+C D - - B
+D - - A -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C -> B -> C
+A -> D, distance: 6, path: A -> C -> B -> C -> C -> D
+B -> A, distance: 3, path: A -> C -> B -> C -> C -> D -> D -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 1, path: B -> C -> D
+C -> A, distance: 6, path: B -> C -> D -> D -> B -> A
+C -> B, distance: 3, path: B -> C -> D -> D -> B -> A -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 4, path: C -> B -> D
+D -> A, distance: 2, path: C -> B -> D -> A
+D -> B, distance: 6, path: C -> B -> D -> A -> B
+D -> C, distance: 4, path: C -> B -> D -> A -> B -> A -> C
+D -> D, distance: 0, path: D
+
+Running test 16...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E
+A  0  -  2 10 13
+B  7  0  5  1  5
+C  -  3  0  4  -
+D  2  6  6  0  8
+E  -  -  -  -  0
+
+Path lengths:
+   A  B  C  D  E
+A  0  5  2  6 10
+B  3  0  5  1  5
+C  6  3  0  4  8
+D  2  6  4  0  8
+E  -  -  -  -  0
+
+Intermediate vertices:
+  A B C D E
+A - C - C C
+B D - - - -
+C D - - - B
+D - - A - -
+E - - - - -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C
+A -> D, distance: 6, path: A -> C -> D
+A -> E, distance: 10, path: A -> C -> B -> E
+B -> A, distance: 3, path: B -> D -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 1, path: B -> D
+B -> E, distance: 5, path: B -> E
+C -> A, distance: 6, path: C -> D -> A
+C -> B, distance: 3, path: C -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 4, path: C -> D
+C -> E, distance: 8, path: C -> B -> E
+D -> A, distance: 2, path: D -> A
+D -> B, distance: 6, path: D -> B
+D -> C, distance: 4, path: D -> A -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+E -> A, distance: infinity, path: none
+E -> B, distance: infinity, path: none
+E -> C, distance: infinity, path: none
+E -> D, distance: infinity, path: none
+E -> E, distance: 0, path: E
+
+Received________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E
+A  0  -  2 10 13
+B  7  0  5  1  5
+C  -  3  0  4  -
+D  2  6  6  0  8
+E  -  -  -  -  0
+
+Path lengths:
+   A  B  C  D  E
+A  0  5  2  6 10
+B  3  0  5  1  5
+C  6  3  0  4  8
+D  2  6  4  0  8
+E  -  -  -  -  0
+
+Intermediate vertices:
+  A B C D E
+A - C - C C
+B D - - - -
+C D - - - B
+D - - A - -
+E - - - - -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C -> B -> C
+A -> D, distance: 6, path: A -> C -> B -> C -> C -> D
+A -> E, distance: 10, path: A -> C -> B -> C -> C -> D -> C -> E
+B -> A, distance: 3, path: A -> C -> B -> C -> C -> D -> C -> E -> D -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 1, path: B -> C -> D
+B -> E, distance: 5, path: B -> C -> D -> E
+C -> A, distance: 6, path: B -> C -> D -> E -> D -> A
+C -> B, distance: 3, path: B -> C -> D -> E -> D -> A -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 4, path: C -> D
+C -> E, distance: 8, path: C -> D -> B -> E
+D -> A, distance: 2, path: C -> D -> B -> E -> A
+D -> B, distance: 6, path: C -> D -> B -> E -> A -> B
+D -> C, distance: 4, path: C -> D -> B -> E -> A -> B -> A -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+E -> A, distance: infinity, path: none
+E -> B, distance: infinity, path: none
+E -> C, distance: infinity, path: none
+E -> D, distance: infinity, path: none
+E -> E, distance: 0, path: E
+
+Running test 17...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+           A          B          C          D          E
+A          0          -          2          -         13
+B          7          0          5 2147483647          5
+C          -          3          0          -          -
+D          2          6          6          0          8
+E          - 2147483647          -          -          0
+
+Path lengths:
+           A          B          C          D          E
+A          0          5          2 2147483652         10
+B          7          0          5 2147483647          5
+C         10          3          0 2147483650          8
+D          2          6          4          0          8
+E 2147483654 2147483647 2147483652 4294967294          0
+
+Intermediate vertices:
+  A B C D E
+A - C - C C
+B - - - - -
+C B - - B B
+D - - A - -
+E B - B B -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C
+A -> D, distance: 2147483652, path: A -> C -> B -> D
+A -> E, distance: 10, path: A -> C -> B -> E
+B -> A, distance: 7, path: B -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 2147483647, path: B -> D
+B -> E, distance: 5, path: B -> E
+C -> A, distance: 10, path: C -> B -> A
+C -> B, distance: 3, path: C -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 2147483650, path: C -> B -> D
+C -> E, distance: 8, path: C -> B -> E
+D -> A, distance: 2, path: D -> A
+D -> B, distance: 6, path: D -> B
+D -> C, distance: 4, path: D -> A -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+E -> A, distance: 2147483654, path: E -> B -> A
+E -> B, distance: 2147483647, path: E -> B
+E -> C, distance: 2147483652, path: E -> B -> C
+E -> D, distance: 4294967294, path: E -> B -> D
+E -> E, distance: 0, path: E
+
+Received________________________________________________________________________
+Distance matrix:
+           A          B          C          D          E
+A          0          -          2          -         13
+B          7          0          5 2147483647          5
+C          -          3          0          -          -
+D          2          6          6          0          8
+E          - 2147483647          -          -          0
+
+Path lengths:
+           A          B          C          D          E
+A          0          5          2 2147483652         10
+B          7          0          5 2147483647          5
+C         10          3          0 2147483650          8
+D          2          6          4          0          8
+E 2147483654 2147483647 2147483652 4294967294          0
+
+Intermediate vertices:
+  A B C D E
+A - C - C C
+B - - - - -
+C B - - B B
+D - - A - -
+E B - B B -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 5, path: A -> C -> B
+A -> C, distance: 2, path: A -> C -> B -> C
+A -> D, distance: -2147483644, path: A -> C -> B -> C -> C -> D
+A -> E, distance: 10, path: A -> C -> B -> C -> C -> D -> C -> E
+B -> A, distance: 7, path: A -> C -> B -> C -> C -> D -> C -> E -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 5, path: B -> C
+B -> D, distance: 2147483647, path: B -> C -> D
+B -> E, distance: 5, path: B -> C -> D -> E
+C -> A, distance: 10, path: B -> C -> D -> E -> B -> A
+C -> B, distance: 3, path: B -> C -> D -> E -> B -> A -> B
+C -> C, distance: 0, path: C
+C -> D, distance: -2147483646, path: C -> B -> D
+C -> E, distance: 8, path: C -> B -> D -> B -> E
+D -> A, distance: 2, path: C -> B -> D -> B -> E -> A
+D -> B, distance: 6, path: C -> B -> D -> B -> E -> A -> B
+D -> C, distance: 4, path: C -> B -> D -> B -> E -> A -> B -> A -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+E -> A, distance: -2147483642, path: D -> E -> B -> A
+E -> B, distance: 2147483647, path: D -> E -> B -> A -> B
+E -> C, distance: -2147483644, path: D -> E -> B -> A -> B -> B -> C
+E -> D, distance: -2, path: D -> E -> B -> A -> B -> B -> C -> B -> D
+E -> E, distance: 0, path: E
+
+Running test 18...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E  F  G
+A  0 11  - 13  -  -  -
+B  7  0  4  -  -  -  -
+C  -  -  0  -  -  -  -
+D  -  -  -  0  8  -  9
+E  9  -  -  -  0 10  2
+F  - 12 19  -  -  0  -
+G  -  -  5  - 29  -  0
+
+Path lengths:
+   A  B  C  D  E  F  G
+A  0 11 15 13 21 31 22
+B  7  0  4 20 28 38 29
+C  -  -  0  -  -  -  -
+D 17 28 14  0  8 18  9
+E  9 20  7 22  0 10  2
+F 19 12 16 32 40  0 41
+G 38 49  5 51 29 39  0
+
+Intermediate vertices:
+  A B C D E F G
+A - - B - D E D
+B - - - A D E D
+C - - - - - - -
+D E E G - - E -
+E - A G A - - -
+F B - B B D - D
+G E E - E - E -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 11, path: A -> B
+A -> C, distance: 15, path: A -> B -> C
+A -> D, distance: 13, path: A -> D
+A -> E, distance: 21, path: A -> D -> E
+A -> F, distance: 31, path: A -> D -> E -> F
+A -> G, distance: 22, path: A -> D -> G
+B -> A, distance: 7, path: B -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 4, path: B -> C
+B -> D, distance: 20, path: B -> A -> D
+B -> E, distance: 28, path: B -> A -> D -> E
+B -> F, distance: 38, path: B -> A -> D -> E -> F
+B -> G, distance: 29, path: B -> A -> D -> G
+C -> A, distance: infinity, path: none
+C -> B, distance: infinity, path: none
+C -> C, distance: 0, path: C
+C -> D, distance: infinity, path: none
+C -> E, distance: infinity, path: none
+C -> F, distance: infinity, path: none
+C -> G, distance: infinity, path: none
+D -> A, distance: 17, path: D -> E -> A
+D -> B, distance: 28, path: D -> E -> A -> B
+D -> C, distance: 14, path: D -> G -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 18, path: D -> E -> F
+D -> G, distance: 9, path: D -> G
+E -> A, distance: 9, path: E -> A
+E -> B, distance: 20, path: E -> A -> B
+E -> C, distance: 7, path: E -> G -> C
+E -> D, distance: 22, path: E -> A -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 10, path: E -> F
+E -> G, distance: 2, path: E -> G
+F -> A, distance: 19, path: F -> B -> A
+F -> B, distance: 12, path: F -> B
+F -> C, distance: 16, path: F -> B -> C
+F -> D, distance: 32, path: F -> B -> A -> D
+F -> E, distance: 40, path: F -> B -> A -> D -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 41, path: F -> B -> A -> D -> G
+G -> A, distance: 38, path: G -> E -> A
+G -> B, distance: 49, path: G -> E -> A -> B
+G -> C, distance: 5, path: G -> C
+G -> D, distance: 51, path: G -> E -> A -> D
+G -> E, distance: 29, path: G -> E
+G -> F, distance: 39, path: G -> E -> F
+G -> G, distance: 0, path: G
+
+Received________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E  F  G
+A  0 11  - 13  -  -  -
+B  7  0  4  -  -  -  -
+C  -  -  0  -  -  -  -
+D  -  -  -  0  8  -  9
+E  9  -  -  -  0 10  2
+F  - 12 19  -  -  0  -
+G  -  -  5  - 29  -  0
+
+Path lengths:
+   A  B  C  D  E  F  G
+A  0 11 15 13 21 31 22
+B  7  0  4 20 28 38 29
+C  -  -  0  -  -  -  -
+D 17 28 14  0  8 18  9
+E  9 20  7 22  0 10  2
+F 19 12 16 32 40  0 41
+G 38 49  5 51 29 39  0
+
+Intermediate vertices:
+  A B C D E F G
+A - - B - D E D
+B - - - A D E D
+C - - - - - - -
+D E E G - - E -
+E - A G A - - -
+F B - B B D - D
+G E E - E - E -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 11, path: A -> B
+A -> C, distance: 15, path: A -> B -> B -> C
+A -> D, distance: 13, path: A -> B -> B -> C -> D
+A -> E, distance: 21, path: A -> B -> B -> C -> D -> D -> E
+A -> F, distance: 31, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F
+A -> G, distance: 22, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G
+B -> A, distance: 7, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 4, path: B -> C
+B -> D, distance: 20, path: B -> C -> A -> D
+B -> E, distance: 28, path: B -> C -> A -> D -> D -> A -> E
+B -> F, distance: 38, path: B -> C -> A -> D -> D -> A -> E -> E -> D -> A -> F
+B -> G, distance: 29, path: B -> C -> A -> D -> D -> A -> E -> E -> D -> A -> F -> D -> A -> G
+C -> A, distance: infinity, path: none
+C -> B, distance: infinity, path: none
+C -> C, distance: 0, path: C
+C -> D, distance: infinity, path: none
+C -> E, distance: infinity, path: none
+C -> F, distance: infinity, path: none
+C -> G, distance: infinity, path: none
+D -> A, distance: 17, path: C -> E -> A
+D -> B, distance: 28, path: C -> E -> A -> E -> B
+D -> C, distance: 14, path: C -> E -> A -> E -> B -> G -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 18, path: D -> E -> E -> F
+D -> G, distance: 9, path: D -> E -> E -> F -> G
+E -> A, distance: 9, path: D -> E -> E -> F -> G -> A
+E -> B, distance: 20, path: D -> E -> E -> F -> G -> A -> A -> B
+E -> C, distance: 7, path: D -> E -> E -> F -> G -> A -> A -> B -> G -> C
+E -> D, distance: 22, path: D -> E -> E -> F -> G -> A -> A -> B -> G -> C -> A -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 10, path: E -> F
+E -> G, distance: 2, path: E -> F -> G
+F -> A, distance: 19, path: E -> F -> G -> B -> A
+F -> B, distance: 12, path: E -> F -> G -> B -> A -> B
+F -> C, distance: 16, path: E -> F -> G -> B -> A -> B -> B -> C
+F -> D, distance: 32, path: E -> F -> G -> B -> A -> B -> B -> C -> B -> D
+F -> E, distance: 40, path: E -> F -> G -> B -> A -> B -> B -> C -> B -> D -> D -> B -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 41, path: F -> D -> B -> G
+G -> A, distance: 38, path: F -> D -> B -> G -> E -> A
+G -> B, distance: 49, path: F -> D -> B -> G -> E -> A -> E -> B
+G -> C, distance: 5, path: F -> D -> B -> G -> E -> A -> E -> B -> C
+G -> D, distance: 51, path: F -> D -> B -> G -> E -> A -> E -> B -> C -> E -> D
+G -> E, distance: 29, path: F -> D -> B -> G -> E -> A -> E -> B -> C -> E -> D -> E
+G -> F, distance: 39, path: F -> D -> B -> G -> E -> A -> E -> B -> C -> E -> D -> E -> E -> F
+G -> G, distance: 0, path: G
+
+Running test 19...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E  F  G  H
+A  0 11  - 13  -  -  -  -
+B  7  0  4  -  -  -  - 33
+C  8 18  0  - 22  -  -  -
+D  -  -  -  0  8  -  9  -
+E  9  -  -  -  0 10  2  -
+F  - 12 19  -  -  0  -  -
+G  -  -  5  - 29  -  0  -
+H  1  4  -  9  -  -  -  0
+
+Path lengths:
+   A  B  C  D  E  F  G  H
+A  0 11 15 13 21 31 22 44
+B  7  0  4 20 26 36 28 33
+C  8 18  0 21 22 32 24 51
+D 17 28 14  0  8 18  9 61
+E  9 20  7 22  0 10  2 53
+F 19 12 16 32 38  0 40 45
+G 13 23  5 26 27 37  0 56
+H  1  4  8  9 17 27 18  0
+
+Intermediate vertices:
+  A B C D E F G H
+A - - B - D E D B
+B - - - A C E E -
+C - - - A - E E B
+D E E G - - E - E
+E - A G A - - - B
+F B - B B C - E B
+G C C - C C E - C
+H - - B - D E D -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 11, path: A -> B
+A -> C, distance: 15, path: A -> B -> C
+A -> D, distance: 13, path: A -> D
+A -> E, distance: 21, path: A -> D -> E
+A -> F, distance: 31, path: A -> D -> E -> F
+A -> G, distance: 22, path: A -> D -> G
+A -> H, distance: 44, path: A -> B -> H
+B -> A, distance: 7, path: B -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 4, path: B -> C
+B -> D, distance: 20, path: B -> A -> D
+B -> E, distance: 26, path: B -> C -> E
+B -> F, distance: 36, path: B -> C -> E -> F
+B -> G, distance: 28, path: B -> C -> E -> G
+B -> H, distance: 33, path: B -> H
+C -> A, distance: 8, path: C -> A
+C -> B, distance: 18, path: C -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 21, path: C -> A -> D
+C -> E, distance: 22, path: C -> E
+C -> F, distance: 32, path: C -> E -> F
+C -> G, distance: 24, path: C -> E -> G
+C -> H, distance: 51, path: C -> B -> H
+D -> A, distance: 17, path: D -> E -> A
+D -> B, distance: 28, path: D -> E -> A -> B
+D -> C, distance: 14, path: D -> G -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 18, path: D -> E -> F
+D -> G, distance: 9, path: D -> G
+D -> H, distance: 61, path: D -> E -> A -> B -> H
+E -> A, distance: 9, path: E -> A
+E -> B, distance: 20, path: E -> A -> B
+E -> C, distance: 7, path: E -> G -> C
+E -> D, distance: 22, path: E -> A -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 10, path: E -> F
+E -> G, distance: 2, path: E -> G
+E -> H, distance: 53, path: E -> A -> B -> H
+F -> A, distance: 19, path: F -> B -> A
+F -> B, distance: 12, path: F -> B
+F -> C, distance: 16, path: F -> B -> C
+F -> D, distance: 32, path: F -> B -> A -> D
+F -> E, distance: 38, path: F -> B -> C -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 40, path: F -> B -> C -> E -> G
+F -> H, distance: 45, path: F -> B -> H
+G -> A, distance: 13, path: G -> C -> A
+G -> B, distance: 23, path: G -> C -> B
+G -> C, distance: 5, path: G -> C
+G -> D, distance: 26, path: G -> C -> A -> D
+G -> E, distance: 27, path: G -> C -> E
+G -> F, distance: 37, path: G -> C -> E -> F
+G -> G, distance: 0, path: G
+G -> H, distance: 56, path: G -> C -> B -> H
+H -> A, distance: 1, path: H -> A
+H -> B, distance: 4, path: H -> B
+H -> C, distance: 8, path: H -> B -> C
+H -> D, distance: 9, path: H -> D
+H -> E, distance: 17, path: H -> D -> E
+H -> F, distance: 27, path: H -> D -> E -> F
+H -> G, distance: 18, path: H -> D -> G
+H -> H, distance: 0, path: H
+
+Received________________________________________________________________________
+Distance matrix:
+   A  B  C  D  E  F  G  H
+A  0 11  - 13  -  -  -  -
+B  7  0  4  -  -  -  - 33
+C  8 18  0  - 22  -  -  -
+D  -  -  -  0  8  -  9  -
+E  9  -  -  -  0 10  2  -
+F  - 12 19  -  -  0  -  -
+G  -  -  5  - 29  -  0  -
+H  1  4  -  9  -  -  -  0
+
+Path lengths:
+   A  B  C  D  E  F  G  H
+A  0 11 15 13 21 31 22 44
+B  7  0  4 20 26 36 28 33
+C  8 18  0 21 22 32 24 51
+D 17 28 14  0  8 18  9 61
+E  9 20  7 22  0 10  2 53
+F 19 12 16 32 38  0 40 45
+G 13 23  5 26 27 37  0 56
+H  1  4  8  9 17 27 18  0
+
+Intermediate vertices:
+  A B C D E F G H
+A - - B - D E D B
+B - - - A C E E -
+C - - - A - E E B
+D E E G - - E - E
+E - A G A - - - B
+F B - B B C - E B
+G C C - C C E - C
+H - - B - D E D -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 11, path: A -> B
+A -> C, distance: 15, path: A -> B -> B -> C
+A -> D, distance: 13, path: A -> B -> B -> C -> D
+A -> E, distance: 21, path: A -> B -> B -> C -> D -> D -> E
+A -> F, distance: 31, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F
+A -> G, distance: 22, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G
+A -> H, distance: 44, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G -> B -> H
+B -> A, distance: 7, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G -> B -> H -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 4, path: B -> C
+B -> D, distance: 20, path: B -> C -> A -> D
+B -> E, distance: 26, path: B -> C -> A -> D -> C -> E
+B -> F, distance: 36, path: B -> C -> A -> D -> C -> E -> E -> C -> F
+B -> G, distance: 28, path: B -> C -> A -> D -> C -> E -> E -> C -> F -> E -> C -> G
+B -> H, distance: 33, path: B -> C -> A -> D -> C -> E -> E -> C -> F -> E -> C -> G -> H
+C -> A, distance: 8, path: B -> C -> A -> D -> C -> E -> E -> C -> F -> E -> C -> G -> H -> A
+C -> B, distance: 18, path: B -> C -> A -> D -> C -> E -> E -> C -> F -> E -> C -> G -> H -> A -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 21, path: C -> A -> D
+C -> E, distance: 22, path: C -> A -> D -> E
+C -> F, distance: 32, path: C -> A -> D -> E -> E -> F
+C -> G, distance: 24, path: C -> A -> D -> E -> E -> F -> E -> G
+C -> H, distance: 51, path: C -> A -> D -> E -> E -> F -> E -> G -> B -> H
+D -> A, distance: 17, path: C -> A -> D -> E -> E -> F -> E -> G -> B -> H -> E -> A
+D -> B, distance: 28, path: C -> A -> D -> E -> E -> F -> E -> G -> B -> H -> E -> A -> E -> B
+D -> C, distance: 14, path: C -> A -> D -> E -> E -> F -> E -> G -> B -> H -> E -> A -> E -> B -> G -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 18, path: D -> E -> E -> F
+D -> G, distance: 9, path: D -> E -> E -> F -> G
+D -> H, distance: 61, path: D -> E -> E -> F -> G -> E -> H
+E -> A, distance: 9, path: D -> E -> E -> F -> G -> E -> H -> A
+E -> B, distance: 20, path: D -> E -> E -> F -> G -> E -> H -> A -> A -> B
+E -> C, distance: 7, path: D -> E -> E -> F -> G -> E -> H -> A -> A -> B -> G -> C
+E -> D, distance: 22, path: D -> E -> E -> F -> G -> E -> H -> A -> A -> B -> G -> C -> A -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 10, path: E -> F
+E -> G, distance: 2, path: E -> F -> G
+E -> H, distance: 53, path: E -> F -> G -> B -> A -> H
+F -> A, distance: 19, path: E -> F -> G -> B -> A -> H -> B -> A
+F -> B, distance: 12, path: E -> F -> G -> B -> A -> H -> B -> A -> B
+F -> C, distance: 16, path: E -> F -> G -> B -> A -> H -> B -> A -> B -> B -> C
+F -> D, distance: 32, path: E -> F -> G -> B -> A -> H -> B -> A -> B -> B -> C -> B -> D
+F -> E, distance: 38, path: E -> F -> G -> B -> A -> H -> B -> A -> B -> B -> C -> B -> D -> C -> B -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 40, path: F -> E -> C -> B -> G
+F -> H, distance: 45, path: F -> E -> C -> B -> G -> B -> H
+G -> A, distance: 13, path: F -> E -> C -> B -> G -> B -> H -> C -> A
+G -> B, distance: 23, path: F -> E -> C -> B -> G -> B -> H -> C -> A -> C -> B
+G -> C, distance: 5, path: F -> E -> C -> B -> G -> B -> H -> C -> A -> C -> B -> C
+G -> D, distance: 26, path: F -> E -> C -> B -> G -> B -> H -> C -> A -> C -> B -> C -> C -> D
+G -> E, distance: 27, path: F -> E -> C -> B -> G -> B -> H -> C -> A -> C -> B -> C -> C -> D -> C -> E
+G -> F, distance: 37, path: F -> E -> C -> B -> G -> B -> H -> C -> A -> C -> B -> C -> C -> D -> C -> E -> E -> C -> F
+G -> G, distance: 0, path: G
+G -> H, distance: 56, path: G -> C -> H
+H -> A, distance: 1, path: G -> C -> H -> A
+H -> B, distance: 4, path: G -> C -> H -> A -> B
+H -> C, distance: 8, path: G -> C -> H -> A -> B -> B -> C
+H -> D, distance: 9, path: G -> C -> H -> A -> B -> B -> C -> D
+H -> E, distance: 17, path: G -> C -> H -> A -> B -> B -> C -> D -> D -> E
+H -> F, distance: 27, path: G -> C -> H -> A -> B -> B -> C -> D -> D -> E -> E -> D -> F
+H -> G, distance: 18, path: G -> C -> H -> A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> D -> G
+H -> H, distance: 0, path: H
+
+Running test 20...failure
+
+Expected________________________________________________________________________
+Distance matrix:
+    A   B   C   D   E   F   G   H   I   J
+A   0 111   - 113   -   -   -   -   -   -
+B  17   0  14   -   -   -   - 133   -  90
+C   8 118   0   -  22   -   -   -   -   -
+D   -   -   -   0   8   -  19   -  15   -
+E  19   -   -   -   0 110   2   -   -   -
+F   -  12 119   -   -   0   -   -   -   -
+G   -   -   5   - 129   -   0   -   -   -
+H  11  14   -  19   -   -   -   0   -   -
+I  23   -   -   -   -   -   9  77   0   -
+J   - 112   -  83   -  54   -   -  18   0
+
+Path lengths:
+    A   B   C   D   E   F   G   H   I   J
+A   0 111 125 113 121 231 123 205 128 201
+B  17   0  14 130  36 144  38 133 108  90
+C   8 118   0 121  22 132  24 213 136 208
+D  23 106  15   0   8 118  10  92  15 196
+E  15 122   7 128   0 110   2 220 143 212
+F  29  12  26 142  48   0  50 145 120 102
+G  13 123   5 126  27 137   0 218 141 213
+H  11  14  28  19  27 137  29   0  34 104
+I  22  91  14  96  36 146   9  77   0 181
+J  40  66  32  83  54  54  27  95  18   0
+
+Intermediate vertices:
+  A B C D E F G H I J
+A - - B - D E E I D B
+B - - - A C J E - J -
+C - - - A - E E I D B
+D G I G - - E E I - I
+E G F G G - - - I G F
+F B - B B C - E B J B
+G C C - C C E - I D C
+H - - B - D E E - D B
+I G H G H G G - - - H
+J I F I - I - I I - -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 111, path: A -> B
+A -> C, distance: 125, path: A -> B -> C
+A -> D, distance: 113, path: A -> D
+A -> E, distance: 121, path: A -> D -> E
+A -> F, distance: 231, path: A -> D -> E -> F
+A -> G, distance: 123, path: A -> D -> E -> G
+A -> H, distance: 205, path: A -> D -> I -> H
+A -> I, distance: 128, path: A -> D -> I
+A -> J, distance: 201, path: A -> B -> J
+B -> A, distance: 17, path: B -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 14, path: B -> C
+B -> D, distance: 130, path: B -> A -> D
+B -> E, distance: 36, path: B -> C -> E
+B -> F, distance: 144, path: B -> J -> F
+B -> G, distance: 38, path: B -> C -> E -> G
+B -> H, distance: 133, path: B -> H
+B -> I, distance: 108, path: B -> J -> I
+B -> J, distance: 90, path: B -> J
+C -> A, distance: 8, path: C -> A
+C -> B, distance: 118, path: C -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 121, path: C -> A -> D
+C -> E, distance: 22, path: C -> E
+C -> F, distance: 132, path: C -> E -> F
+C -> G, distance: 24, path: C -> E -> G
+C -> H, distance: 213, path: C -> A -> D -> I -> H
+C -> I, distance: 136, path: C -> A -> D -> I
+C -> J, distance: 208, path: C -> B -> J
+D -> A, distance: 23, path: D -> E -> G -> C -> A
+D -> B, distance: 106, path: D -> I -> H -> B
+D -> C, distance: 15, path: D -> E -> G -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 118, path: D -> E -> F
+D -> G, distance: 10, path: D -> E -> G
+D -> H, distance: 92, path: D -> I -> H
+D -> I, distance: 15, path: D -> I
+D -> J, distance: 196, path: D -> I -> H -> B -> J
+E -> A, distance: 15, path: E -> G -> C -> A
+E -> B, distance: 122, path: E -> F -> B
+E -> C, distance: 7, path: E -> G -> C
+E -> D, distance: 128, path: E -> G -> C -> A -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 110, path: E -> F
+E -> G, distance: 2, path: E -> G
+E -> H, distance: 220, path: E -> G -> C -> A -> D -> I -> H
+E -> I, distance: 143, path: E -> G -> C -> A -> D -> I
+E -> J, distance: 212, path: E -> F -> B -> J
+F -> A, distance: 29, path: F -> B -> A
+F -> B, distance: 12, path: F -> B
+F -> C, distance: 26, path: F -> B -> C
+F -> D, distance: 142, path: F -> B -> A -> D
+F -> E, distance: 48, path: F -> B -> C -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 50, path: F -> B -> C -> E -> G
+F -> H, distance: 145, path: F -> B -> H
+F -> I, distance: 120, path: F -> B -> J -> I
+F -> J, distance: 102, path: F -> B -> J
+G -> A, distance: 13, path: G -> C -> A
+G -> B, distance: 123, path: G -> C -> B
+G -> C, distance: 5, path: G -> C
+G -> D, distance: 126, path: G -> C -> A -> D
+G -> E, distance: 27, path: G -> C -> E
+G -> F, distance: 137, path: G -> C -> E -> F
+G -> G, distance: 0, path: G
+G -> H, distance: 218, path: G -> C -> A -> D -> I -> H
+G -> I, distance: 141, path: G -> C -> A -> D -> I
+G -> J, distance: 213, path: G -> C -> B -> J
+H -> A, distance: 11, path: H -> A
+H -> B, distance: 14, path: H -> B
+H -> C, distance: 28, path: H -> B -> C
+H -> D, distance: 19, path: H -> D
+H -> E, distance: 27, path: H -> D -> E
+H -> F, distance: 137, path: H -> D -> E -> F
+H -> G, distance: 29, path: H -> D -> E -> G
+H -> H, distance: 0, path: H
+H -> I, distance: 34, path: H -> D -> I
+H -> J, distance: 104, path: H -> B -> J
+I -> A, distance: 22, path: I -> G -> C -> A
+I -> B, distance: 91, path: I -> H -> B
+I -> C, distance: 14, path: I -> G -> C
+I -> D, distance: 96, path: I -> H -> D
+I -> E, distance: 36, path: I -> G -> C -> E
+I -> F, distance: 146, path: I -> G -> C -> E -> F
+I -> G, distance: 9, path: I -> G
+I -> H, distance: 77, path: I -> H
+I -> I, distance: 0, path: I
+I -> J, distance: 181, path: I -> H -> B -> J
+J -> A, distance: 40, path: J -> I -> G -> C -> A
+J -> B, distance: 66, path: J -> F -> B
+J -> C, distance: 32, path: J -> I -> G -> C
+J -> D, distance: 83, path: J -> D
+J -> E, distance: 54, path: J -> I -> G -> C -> E
+J -> F, distance: 54, path: J -> F
+J -> G, distance: 27, path: J -> I -> G
+J -> H, distance: 95, path: J -> I -> H
+J -> I, distance: 18, path: J -> I
+J -> J, distance: 0, path: J
+
+Received________________________________________________________________________
+Distance matrix:
+    A   B   C   D   E   F   G   H   I   J
+A   0 111   - 113   -   -   -   -   -   -
+B  17   0  14   -   -   -   - 133   -  90
+C   8 118   0   -  22   -   -   -   -   -
+D   -   -   -   0   8   -  19   -  15   -
+E  19   -   -   -   0 110   2   -   -   -
+F   -  12 119   -   -   0   -   -   -   -
+G   -   -   5   - 129   -   0   -   -   -
+H  11  14   -  19   -   -   -   0   -   -
+I  23   -   -   -   -   -   9  77   0   -
+J   - 112   -  83   -  54   -   -  18   0
+
+Path lengths:
+    A   B   C   D   E   F   G   H   I   J
+A   0 111 125 113 121 231 123 205 128 201
+B  17   0  14 130  36 144  38 133 108  90
+C   8 118   0 121  22 132  24 213 136 208
+D  23 106  15   0   8 118  10  92  15 196
+E  15 122   7 128   0 110   2 220 143 212
+F  29  12  26 142  48   0  50 145 120 102
+G  13 123   5 126  27 137   0 218 141 213
+H  11  14  28  19  27 137  29   0  34 104
+I  22  91  14  96  36 146   9  77   0 181
+J  40  66  32  83  54  54  27  95  18   0
+
+Intermediate vertices:
+  A B C D E F G H I J
+A - - B - D E E I D B
+B - - - A C J E - J -
+C - - - A - E E I D B
+D G I G - - E E I - I
+E G F G G - - - I G F
+F B - B B C - E B J B
+G C C - C C E - I D C
+H - - B - D E E - D B
+I G H G H G G - - - H
+J I F I - I - I I - -
+
+A -> A, distance: 0, path: A
+A -> B, distance: 111, path: A -> B
+A -> C, distance: 125, path: A -> B -> B -> C
+A -> D, distance: 113, path: A -> B -> B -> C -> D
+A -> E, distance: 121, path: A -> B -> B -> C -> D -> D -> E
+A -> F, distance: 231, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F
+A -> G, distance: 123, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G
+A -> H, distance: 205, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G -> I -> D -> H
+A -> I, distance: 128, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G -> I -> D -> H -> D -> I
+A -> J, distance: 201, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G -> I -> D -> H -> D -> I -> B -> J
+B -> A, distance: 17, path: A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G -> I -> D -> H -> D -> I -> B -> J -> A
+B -> B, distance: 0, path: B
+B -> C, distance: 14, path: B -> C
+B -> D, distance: 130, path: B -> C -> A -> D
+B -> E, distance: 36, path: B -> C -> A -> D -> C -> E
+B -> F, distance: 144, path: B -> C -> A -> D -> C -> E -> J -> F
+B -> G, distance: 38, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G
+B -> H, distance: 133, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G -> H
+B -> I, distance: 108, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G -> H -> J -> I
+B -> J, distance: 90, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G -> H -> J -> I -> J
+C -> A, distance: 8, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G -> H -> J -> I -> J -> A
+C -> B, distance: 118, path: B -> C -> A -> D -> C -> E -> J -> F -> E -> C -> G -> H -> J -> I -> J -> A -> B
+C -> C, distance: 0, path: C
+C -> D, distance: 121, path: C -> A -> D
+C -> E, distance: 22, path: C -> A -> D -> E
+C -> F, distance: 132, path: C -> A -> D -> E -> E -> F
+C -> G, distance: 24, path: C -> A -> D -> E -> E -> F -> E -> G
+C -> H, distance: 213, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H
+C -> I, distance: 136, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H -> D -> A -> I
+C -> J, distance: 208, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H -> D -> A -> I -> B -> J
+D -> A, distance: 23, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H -> D -> A -> I -> B -> J -> G -> E -> A
+D -> B, distance: 106, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H -> D -> A -> I -> B -> J -> G -> E -> A -> I -> B
+D -> C, distance: 15, path: C -> A -> D -> E -> E -> F -> E -> G -> I -> D -> A -> H -> D -> A -> I -> B -> J -> G -> E -> A -> I -> B -> G -> E -> C
+D -> D, distance: 0, path: D
+D -> E, distance: 8, path: D -> E
+D -> F, distance: 118, path: D -> E -> E -> F
+D -> G, distance: 10, path: D -> E -> E -> F -> E -> G
+D -> H, distance: 92, path: D -> E -> E -> F -> E -> G -> I -> H
+D -> I, distance: 15, path: D -> E -> E -> F -> E -> G -> I -> H -> I
+D -> J, distance: 196, path: D -> E -> E -> F -> E -> G -> I -> H -> I -> I -> J
+E -> A, distance: 15, path: D -> E -> E -> F -> E -> G -> I -> H -> I -> I -> J -> G -> A
+E -> B, distance: 122, path: D -> E -> E -> F -> E -> G -> I -> H -> I -> I -> J -> G -> A -> F -> B
+E -> C, distance: 7, path: D -> E -> E -> F -> E -> G -> I -> H -> I -> I -> J -> G -> A -> F -> B -> G -> C
+E -> D, distance: 128, path: D -> E -> E -> F -> E -> G -> I -> H -> I -> I -> J -> G -> A -> F -> B -> G -> C -> G -> D
+E -> E, distance: 0, path: E
+E -> F, distance: 110, path: E -> F
+E -> G, distance: 2, path: E -> F -> G
+E -> H, distance: 220, path: E -> F -> G -> I -> G -> H
+E -> I, distance: 143, path: E -> F -> G -> I -> G -> H -> G -> I
+E -> J, distance: 212, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J
+F -> A, distance: 29, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J -> B -> A
+F -> B, distance: 12, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J -> B -> A -> B
+F -> C, distance: 26, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J -> B -> A -> B -> B -> C
+F -> D, distance: 142, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J -> B -> A -> B -> B -> C -> B -> D
+F -> E, distance: 48, path: E -> F -> G -> I -> G -> H -> G -> I -> F -> J -> B -> A -> B -> B -> C -> B -> D -> C -> B -> E
+F -> F, distance: 0, path: F
+F -> G, distance: 50, path: F -> E -> C -> B -> G
+F -> H, distance: 145, path: F -> E -> C -> B -> G -> B -> H
+F -> I, distance: 120, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I
+F -> J, distance: 102, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J
+G -> A, distance: 13, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A
+G -> B, distance: 123, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A -> C -> B
+G -> C, distance: 5, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A -> C -> B -> C
+G -> D, distance: 126, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A -> C -> B -> C -> C -> D
+G -> E, distance: 27, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A -> C -> B -> C -> C -> D -> C -> E
+G -> F, distance: 137, path: F -> E -> C -> B -> G -> B -> H -> J -> B -> I -> B -> J -> C -> A -> C -> B -> C -> C -> D -> C -> E -> E -> C -> F
+G -> G, distance: 0, path: G
+G -> H, distance: 218, path: G -> I -> D -> C -> H
+G -> I, distance: 141, path: G -> I -> D -> C -> H -> D -> C -> I
+G -> J, distance: 213, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J
+H -> A, distance: 11, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A
+H -> B, distance: 14, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B
+H -> C, distance: 28, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B -> B -> C
+H -> D, distance: 19, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B -> B -> C -> D
+H -> E, distance: 27, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B -> B -> C -> D -> D -> E
+H -> F, distance: 137, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B -> B -> C -> D -> D -> E -> E -> D -> F
+H -> G, distance: 29, path: G -> I -> D -> C -> H -> D -> C -> I -> C -> J -> A -> B -> B -> C -> D -> D -> E -> E -> D -> F -> E -> D -> G
+H -> H, distance: 0, path: H
+H -> I, distance: 34, path: H -> D -> I
+H -> J, distance: 104, path: H -> D -> I -> B -> J
+I -> A, distance: 22, path: H -> D -> I -> B -> J -> G -> A
+I -> B, distance: 91, path: H -> D -> I -> B -> J -> G -> A -> H -> B
+I -> C, distance: 14, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C
+I -> D, distance: 96, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C -> H -> D
+I -> E, distance: 36, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C -> H -> D -> G -> E
+I -> F, distance: 146, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C -> H -> D -> G -> E -> G -> F
+I -> G, distance: 9, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C -> H -> D -> G -> E -> G -> F -> G
+I -> H, distance: 77, path: H -> D -> I -> B -> J -> G -> A -> H -> B -> G -> C -> H -> D -> G -> E -> G -> F -> G -> H
+I -> I, distance: 0, path: I
+I -> J, distance: 181, path: I -> H -> J
+J -> A, distance: 40, path: I -> H -> J -> I -> A
+J -> B, distance: 66, path: I -> H -> J -> I -> A -> F -> B
+J -> C, distance: 32, path: I -> H -> J -> I -> A -> F -> B -> I -> C
+J -> D, distance: 83, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D
+J -> E, distance: 54, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D -> I -> E
+J -> F, distance: 54, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D -> I -> E -> F
+J -> G, distance: 27, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D -> I -> E -> F -> I -> G
+J -> H, distance: 95, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D -> I -> E -> F -> I -> G -> I -> H
+J -> I, distance: 18, path: I -> H -> J -> I -> A -> F -> B -> I -> C -> D -> I -> E -> F -> I -> G -> I -> H -> I
+J -> J, distance: 0, path: J
+
+
+Total tests run: 20
+Number correct : 14
+Percent correct: 70.00
+
+Cleaning project...done
